@@ -1,0 +1,35 @@
+camunda.bpm.admin-user:
+  id: admin
+  password: admin
+
+server:
+  port: 8090
+
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: app.1
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+
+constants:
+  max-attempts: 3
+  main-process-key: Process-camunda-kafka-homework
+  register-input-request-task-key: Task-register-input-request
+  dead-letter-was-received-msg-ref: DeadLetterWasReceived
+  exception-was-received-msg-ref: ExceptionWasReceived
+
+kafka:
+  topics:
+    dead-letter-queue: DEAD_LETTER_QUEUE
+    exception-queue: EXCEPTION_QUEUE
+
+
+logging:
+  level:
+    org.apache.kafka: ERROR
